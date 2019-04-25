@@ -56,6 +56,18 @@ button.release {
   background-color: #E1332D;
 }
 
+div#error-bar {
+  height: 7vh;
+  font-size: 2em;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
 @media only screen and (min-width: 500px) {
   main {
     grid-template-columns: 1fr 1fr;
