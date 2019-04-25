@@ -90,6 +90,7 @@ function releasePokemon(id) {
     .then( res => res.json() )
 }
 
+
 function main() {
     loadTrainers()
 }
