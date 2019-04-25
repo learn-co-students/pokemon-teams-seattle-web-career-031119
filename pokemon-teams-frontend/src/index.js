@@ -119,4 +119,11 @@ function pokemonPost(id) {
 
 function displayError(err) {
   console.log('err:', err)
+  //setInterval(function () {
+
+  //}, 10);
+  //setTimeout(function () {
+
+  //}, 10);
+  //make an error bar
 }
