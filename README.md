@@ -5,7 +5,8 @@ trainers at Flatiron School. Through their journey,
 **a Pokemon trainer can only have 6 Pokemon for their
 team**. If they want to add another Pokemon, they must
 release one of their Pokemon first.
-
+ 
+ 
 ![Showing how the application runs from loading, adding Pokemon to a team and also releasing one](/pokemon-teams-frontend/assets/pokemon_teams.gif)
 
 ## Requirements
