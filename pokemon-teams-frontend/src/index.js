@@ -35,6 +35,14 @@ function makeCard(trainerName){
 	let button = document.createElement('button')
 		button.setAttribute("data-trainer-id", trainerName.id)
 		button.textContent = "Add Pokemon"
+		button.addEventListener('click', () => {
+			createPokemon(trainerName.id)
+			.then(json => {
+				addPokemon(json, trainerName, topDiv)
+
+
+			})
+		})
 
 	let ul = document.createElement('ul')
 
@@ -49,8 +57,12 @@ function makeCard(trainerName){
 		releaseButton.setAttribute("class", "release")
 		releaseButton.setAttribute("data-pokemon-id", pokemon.id)
 		releaseButton.textContent = "Release"
-		
+
 		li.appendChild(releaseButton)
+
+		releaseButton.addEventListener('click', () => {
+			removePokemon(pokemon.id)
+		})
 	})
 
 		main.appendChild(topDiv)
@@ -59,8 +71,58 @@ function makeCard(trainerName){
 		topDiv.appendChild(ul)
 }
 
+function createPokemon(id) {
+	return fetch(POKEMONS_URL, {
+		method: 'POST',
+		headers: {
+		'Content-Type': 'application/json',
+		'Accept': 'application/json'
+	},
+	body: JSON.stringify({
+		'trainer_id': id
+	})
+}).then(res => {return res.json()})
+	.catch(err => {
+		displayError(err)
+	})
+.then(_ => window.location.reload())
+}
 
+function addPokemon(pokemon, trainerName, topDiv){
 
+	let li = document.createElement('li')
+	li.textContent = `${pokemon.nickname}  (${pokemon.species})`
+
+	ul = topDiv.querySelector("ul")
+	ul.appendChild(li)
+	let releaseButton = document.createElement('button')
+	releaseButton.setAttribute("class", "release")
+	releaseButton.setAttribute("data-pokemon-id", pokemon.id)
+	releaseButton.textContent = "Release"
+
+	li.appendChild(releaseButton)
+}
+// function releasePokemon(pokemon, li){
+// 	removePokemon(pokemon.id)
+// }
+
+function removePokemon(id){
+return fetch(POKEMONS_URL + '/' + id, {
+	method: 'DELETE'
+	})
+	.then(res => res.json())
+	.catch(err => {
+		displayError(err)
+	})
+	.then(_ => window.location.reload())
+}
+
+// function displayError(err){
+// 	console.log("err:" err)
+// 	let errorBar = document.getElementsById("error")
+// 	let message = documetn.getElementById('message')
+// 	message.textContent = err.message
+// }
 
 
 
@@ -69,6 +131,7 @@ function makeCard(trainerName){
 
 //CALLING FUNCTION
 loadTrainers()
+
 
 
 	// function displayTrainer(trainer)
